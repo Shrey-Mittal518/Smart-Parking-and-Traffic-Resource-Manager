@@ -1,0 +1,317 @@
+
+.dashboard {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  background: #f1f6fc;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #111827;
+}
+
+
+.left-panel {
+  flex: 0 0 234px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 12px 20px;
+  background: linear-gradient(180deg, #14305e 0%, #0e2347 100%);
+  color: #e6edf9;
+  overflow-y: auto;
+}
+
+.left-panel .logo {
+  flex-shrink: 0;
+  width: auto;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.left-panel .logo::before {
+  content: "SPTRM";
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.left-panel .logo::after {
+  content: "Smart Parking & Traffic Resource Manager";
+  max-width: 170px;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #dbe6f7;
+}
+
+.nav-item {
+  position: relative;
+  padding: 13px 16px 13px 62px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-item::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translateY(-50%);
+  border: 2px solid currentColor;
+  border-radius: 5px;
+  opacity: 0.85;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.logo + .nav-item,
+.logo + .nav-item:hover {
+  background: #1a66f2;
+  color: #fff;
+}
+
+
+.right-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 28px 28px;
+  overflow-y: auto;
+}
+
+
+.header,
+.right-panel > div:has(> .header-left) {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.header-left p {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #4b5563;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.notification-icon {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9'/%3E%3Cpath d='M10.3 21a1.9 1.9 0 0 0 3.4 0'/%3E%3C/svg%3E") center / contain no-repeat;
+  cursor: pointer;
+}
+
+.notification-icon::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+}
+
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.user-profile::before {
+  content: "A";
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  background: #14305e;
+  border-radius: 50%;
+}
+
+.user-profile::after {
+  content: "Aditya Bora\A User   \2335";
+  white-space: pre;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.Total-slots,
+.Available-slots,
+.Occupied-slots,
+.Ev-charging-slots,
+.parking-overview,
+.Recent-activity,
+.Slot-occupancy,
+.Traffic,
+.Quick-actions {
+  background: #fff;
+  border: 1px solid #e6ecf5;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.05);
+}
+
+.Content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.Total-slots,
+.Available-slots,
+.Occupied-slots,
+.Ev-charging-slots {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 134px;
+  padding: 22px;
+}
+
+.Total-slots::before,
+.Available-slots::before,
+.Occupied-slots::before,
+.Ev-charging-slots::before {
+  content: "";
+  flex: 0 0 72px;
+  height: 72px;
+  border-radius: 16px;
+}
+
+.Total-slots::before       { background: #1a66f2; }
+.Available-slots::before   { background: #22b573; }
+.Occupied-slots::before    { background: #f2493f; }
+.Ev-charging-slots::before { background: #5b4fe6; }
+
+
+.content-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+}
+
+.parking-overview,
+.Recent-activity {
+  min-height: 500px;
+  padding: 22px;
+}
+
+.parking-overview img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+
+.content-3 {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr 0.95fr;
+  gap: 16px;
+}
+
+.Slot-occupancy,
+.Traffic {
+  min-height: 275px;
+  padding: 22px;
+}
+
+.Quick-actions {
+  min-height: 275px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 12px;
+}
+
+.Quick-actions::before {
+  content: "Quick Actions";
+  grid-column: 1 / -1;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.action-1,
+.action-2,
+.action-3,
+.action-4 {
+  position: relative;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e3e9f3;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+
+.action-1::after,
+.action-2::after,
+.action-3::after,
+.action-4::after {
+  content: "›";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #374151;
+}
+
+.action-1:hover,
+.action-2:hover,
+.action-3:hover,
+.action-4:hover {
+  border-color: #1a66f2;
+  box-shadow: 0 4px 14px rgba(26, 102, 242, 0.15);
+}
+
+
+@media (max-width: 1200px) {
+  .Content { grid-template-columns: repeat(2, 1fr); }
+  .content-2,
+  .content-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 800px) {
+  .left-panel { flex-basis: 76px; }
+  .nav-item { height: 48px; padding-left: 0; font-size: 0; }
+  .nav-item::before { left: 27px; }
+  .left-panel .logo::after { display: none; }
+  .left-panel .logo::before { font-size: 14px; }
+  .header-left p { display: none; }
+}
