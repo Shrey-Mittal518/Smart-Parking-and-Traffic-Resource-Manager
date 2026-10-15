@@ -1,0 +1,290 @@
+
+
+:root {
+  --blue: #1565f2;
+  --green: #1fb86a;
+  --red: #f0483e;
+  --text: #1b2437;
+  --muted: #5b6577;
+  --border: #e4e8f0;
+
+  /* slot colours */
+  --W: #f2f2f2;  --K: #222428;  --R: #e03a34;  --Bc: #1f4fb8;
+  --N: #17306e;  --G: #1fb86a;  --E: #1565f2;  --X: #9aa0a9;  --Rb: #f06a64;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; color: var(--text); background: #f6f8fc; }
+
+.dashboard { display: flex; min-height: 100vh; }
+
+/* ================= SIDEBAR ================= */
+.left-panel {
+  width: 234px; flex-shrink: 0; padding: 14px 12px;
+  background: linear-gradient(180deg, #0b1f4a 0%, #0a1a3d 100%); color: #fff;
+}
+.logo { text-align: center; padding: 4px 0 24px; }
+.logo::before { content: "🚗 SPTRM"; display: block; font-size: 30px; font-weight: 800; letter-spacing: .5px; }
+.logo::after {
+  content: "Smart Parking & Traffic\A Resource Manager"; white-space: pre; display: block;
+  margin-top: 6px; font-size: 15px; line-height: 1.25; color: #e6ecff;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 16px; padding: 14px 16px; margin-bottom: 4px;
+  font-size: 16px; color: #e8edfb; border-radius: 6px; cursor: pointer;
+}
+.nav-item:hover { background: rgba(255, 255, 255, .08); }
+.nav-item.active { background: var(--blue); color: #fff; font-weight: 600; }
+.nav-item::before { font-size: 20px; width: 24px; text-align: center; }
+.nav-item:nth-child(2)::before  { content: "🏠"; }
+.nav-item:nth-child(3)::before  { content: "🗺️"; }
+.nav-item:nth-child(4)::before  { content: "📅"; }
+.nav-item:nth-child(5)::before  { content: "📄"; }
+.nav-item:nth-child(6)::before  { content: "💳"; }
+.nav-item:nth-child(7)::before  { content: "📈"; }
+.nav-item:nth-child(8)::before  { content: "📊"; }
+.nav-item:nth-child(9)::before  { content: "👥"; }
+.nav-item:nth-child(10)::before { content: "⚙️"; }
+.nav-item:nth-child(11)::before { content: "⚙️"; }
+
+/* ================= RIGHT SIDE ================= */
+.right-panel { flex: 1; min-width: 0; padding: 0 24px 24px; }
+
+/* ---------- header ---------- */
+.header { display: flex; justify-content: space-between; align-items: flex-start; padding: 22px 0 18px; }
+.header h1 { font-size: 34px; font-weight: 700; letter-spacing: -.3px; }
+.header p  { font-size: 17px; color: var(--muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 28px; padding-top: 10px; }
+.notification-icon { position: relative; width: 26px; height: 26px; }
+.notification-icon::before { content: "🔔"; font-size: 22px; }
+.notification-icon::after {
+  content: ""; position: absolute; top: 0; right: 2px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+}
+.user-profile {
+  position: relative; min-width: 150px; min-height: 46px; padding-left: 58px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='23' fill='%2312306b'/%3E%3Ctext x='23' y='30' text-anchor='middle' font-size='20' font-family='sans-serif' fill='white'%3EA%3C/text%3E%3C/svg%3E") no-repeat left center / 46px 46px;
+}
+.user-profile::before { content: "Aditya Bora"; display: block; padding-top: 4px; font-size: 15px; font-weight: 700; }
+.user-profile::after  { content: "User"; display: block; font-size: 13px; color: var(--muted); }
+
+/* ================= STEPPER ================= */
+.stepper {
+  display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr auto; align-items: start;
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px 36px 16px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+}
+.step { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 100px; }
+.step::before {
+  width: 36px; height: 36px; border-radius: 50%; background: #c3c9d6; color: #fff;
+  display: grid; place-items: center; font-size: 16px; font-weight: 600;
+}
+.step::after { font-size: 16px; color: var(--muted); }
+.step-1::before { content: "1"; } .step-1::after { content: "Select Details"; }
+.step-2::before { content: "2"; } .step-2::after { content: "Choose Slot"; }
+.step-3::before { content: "3"; } .step-3::after { content: "Confirm Booking"; }
+.step-4::before { content: "4"; } .step-4::after { content: "Payment"; }
+.step.active::before { background: var(--blue); box-shadow: 0 0 0 4px #dbe7ff; }
+.step.active::after  { color: var(--blue); font-weight: 600; }
+.step-line { height: 2px; background: #b8c0d0; margin: 18px 10px 0; }
+.step-line.active { background: var(--blue); }
+
+/* ================= MAIN GRID ================= */
+.main-grid { display: grid; grid-template-columns: 1fr 328px; gap: 14px; align-items: start; }
+.left-column { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.booking-form, .select-slot, .booking-summary {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+}
+
+/* ---------- booking form ---------- */
+.booking-form { padding: 6px 20px 20px; }
+.form-row { display: grid; grid-template-columns: 1.07fr 1fr 1fr; gap: 20px; }
+.form-row + .form-row { margin-top: 12px; }
+.field {
+  position: relative; height: 60px; margin-top: 32px;
+  border: 1px solid #d5dbe6; border-radius: 8px; background-color: #fff;
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 18px 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b2437' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+.field::before { position: absolute; left: 0; top: -28px; font-size: 16px; font-weight: 500; }
+.field::after {
+  position: absolute; inset: 0; display: flex; align-items: center; padding-left: 18px;
+  white-space: pre; font-size: 16px; line-height: 1.3;
+}
+.field-vehicle::before       { content: "Vehicle"; }
+.field-vehicle::after        { content: "🚗   UK07CD4567\A       Honda City (Car)"; }
+.field-parking-type::before  { content: "Parking Type"; }
+.field-parking-type::after   { content: "🚙   Normal Slot"; }
+.field-date::before          { content: "Date"; }
+.field-date::after           { content: "📅   12 Oct 2026"; }
+.field-entry-time::before    { content: "Entry Time"; }
+.field-entry-time::after     { content: "🕙   10:00 AM"; }
+.field-exit-time::before     { content: "Exit Time"; }
+.field-exit-time::after      { content: "🕑   02:00 PM"; }
+.field-duration { background-color: #f3f5f9; background-image: none; border-color: #e6eaf1; color: #8a93a5; }
+.field-duration::before { content: "Duration"; color: var(--text); }
+.field-duration::after  { content: "⏳   4 hours"; }
+
+/* ---------- select a slot ---------- */
+.select-slot { padding: 18px 20px 22px; }
+.select-slot-title::before { content: "Select a Slot"; display: block; font-size: 20px; font-weight: 700; }
+.slot-tabs { display: grid; grid-template-columns: 1.1fr 1.4fr 1.7fr 1.35fr 1.2fr; gap: 14px; margin: 14px 0 16px; }
+.tab { height: 34px; border-radius: 6px; background: #f0f2f7; display: grid; place-items: center; font-size: 14px; }
+.tab.active { background: var(--blue); color: #fff; }
+.tab-all::before     { content: "All Slots (120)"; }
+.tab-normal::before  { content: "Normal (90)"; }
+.tab-ev::before      { content: "EV Charging (10)"; }
+.tab-disabled::before{ content: "Disabled (5)"; }
+.tab-vip::before     { content: "VIP (5)"; }
+
+/* ================= PARKING VIEW ================= */
+.parking-view {
+  container-type: inline-size; position: relative; overflow: hidden;
+  aspect-ratio: 798 / 452; border-radius: 8px;
+  background-color: #3a3d42;
+  background-image:
+    linear-gradient(#4a8a3d, #4a8a3d), linear-gradient(#4a8a3d, #4a8a3d),
+    linear-gradient(#4a8a3d, #4a8a3d), linear-gradient(#4a8a3d, #4a8a3d);
+  background-size: 6% 100%, 6% 100%, 100% 11%, 100% 6%;
+  background-position: 0 0, 100% 0, 0 0, 0 100%;
+  background-repeat: no-repeat;
+}
+.parking-view > div { position: absolute; }
+
+.legend-bar {
+  right: 0; top: 0; width: 53.8cqw; height: 5.6cqw; background: #fff; z-index: 5;
+  border-radius: 0 0 0 1cqw; display: flex; align-items: center; justify-content: center;
+}
+.legend-bar::before {
+  content: "🟢 Available      🔴 Occupied      🔵 EV Charging      ⚪ Blocked";
+  white-space: pre; font-size: 1.5cqw; color: #2b3447;
+}
+.compass {
+  left: 2cqw; top: 3cqw; z-index: 5; width: 7cqw; height: 7cqw; border-radius: 50%;
+  background: #fff; border: .25cqw solid #1b2437; display: grid; place-items: center;
+}
+.compass::before { content: "▲\A N"; white-space: pre; text-align: center; font-weight: 800; font-size: 1.7cqw; line-height: 1.1; }
+
+/* parking lots (colour strips, 1 gradient per row) */
+.lot {
+  left: 20.5cqw; width: 59cqw; height: 7.8cqw; padding: .5cqw;
+  border: .4cqw solid #5d9a47; border-radius: .8cqw; background-color: #3b3f45;
+  background-repeat: no-repeat; background-origin: content-box; background-clip: padding-box;
+  background-size: 100% 100%, 100% 100%;
+}
+.lot-top {
+  top: 8.1cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(9.09% - .4cqw), #3b3f45 calc(9.09% - .4cqw) 9.09%),
+    linear-gradient(90deg, var(--Bc) 0 9.09%, var(--W) 9.09% 18.18%, var(--G) 18.18% 27.27%, var(--G) 27.27% 36.36%, var(--N) 36.36% 45.45%, var(--G) 45.45% 54.55%, var(--K) 54.55% 63.64%, var(--R) 63.64% 72.73%, var(--G) 72.73% 81.82%, var(--X) 81.82% 90.91%, var(--K) 90.91% 100%);
+}
+.lot-mid-1 {
+  top: 21.5cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(8.333% - .4cqw), #3b3f45 calc(8.333% - .4cqw) 8.333%),
+    linear-gradient(90deg, var(--G) 0 8.333%, var(--K) 8.333% 16.667%, var(--W) 16.667% 25%, var(--R) 25% 33.333%, var(--X) 33.333% 41.667%, var(--G) 41.667% 50%, var(--K) 50% 58.333%, var(--G) 58.333% 66.667%, var(--N) 66.667% 75%, var(--W) 75% 83.333%, var(--R) 83.333% 91.667%, var(--X) 91.667% 100%);
+}
+.lot-mid-2 {
+  top: 29.3cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(8.333% - .4cqw), #3b3f45 calc(8.333% - .4cqw) 8.333%),
+    linear-gradient(90deg, var(--N) 0 8.333%, var(--R) 8.333% 16.667%, var(--Rb) 16.667% 25%, var(--K) 25% 33.333%, var(--W) 33.333% 41.667%, var(--G) 41.667% 50%, var(--W) 50% 58.333%, var(--G) 58.333% 66.667%, var(--K) 66.667% 75%, var(--X) 75% 83.333%, var(--W) 83.333% 91.667%, var(--X) 91.667% 100%);
+}
+.lot-bottom {
+  top: 43.9cqw; left: 21.8cqw; width: 57.9cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(9.09% - .4cqw), #3b3f45 calc(9.09% - .4cqw) 9.09%),
+    linear-gradient(90deg, var(--K) 0 9.09%, var(--W) 9.09% 18.18%, var(--G) 18.18% 27.27%, var(--G) 27.27% 36.36%, var(--E) 36.36% 45.45%, var(--W) 45.45% 54.55%, var(--E) 54.55% 63.64%, var(--W) 63.64% 72.73%, var(--W) 72.73% 81.82%, var(--X) 81.82% 90.91%, var(--X) 90.91% 100%);
+}
+
+/* selected slot A12 */
+.slot-a12 {
+  left: 44.7cqw; top: 21.3cqw; width: 6.9cqw; height: 8.4cqw; z-index: 3;
+  background: var(--G); border: .4cqw solid var(--blue); border-radius: .6cqw;
+  box-shadow: 0 0 1.4cqw rgba(21, 101, 242, .8);
+}
+.slot-a12::before {
+  content: "A12"; position: absolute; left: 50%; top: -4cqw; transform: translateX(-50%);
+  background: #fff; color: #111; font-size: 1.4cqw; font-weight: 700;
+  padding: .5cqw 1.2cqw; border-radius: .5cqw; box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+}
+.slot-a12::after {
+  content: ""; position: absolute; left: 22%; right: 22%; top: 10%; bottom: 10%;
+  background: var(--W); border-radius: 1.2cqw; box-shadow: 0 0 .5cqw rgba(0, 0, 0, .5);
+}
+
+/* entry / exit / gates */
+.entry, .exit {
+  top: 32cqw; z-index: 4; color: #fff; text-align: center; font-weight: 700;
+}
+.entry { left: 3.5cqw; } .exit { right: 3.5cqw; }
+.entry::before, .exit::before {
+  content: "↑\A\A\A ENTRY\A\A\A↑"; white-space: pre; font-size: 2.1cqw; line-height: 1.4;
+}
+.exit::before { content: "↑\A\A\A EXIT\A\A\A↑"; }
+.boom {
+  top: 31cqw; z-index: 4; width: 8cqw; height: .9cqw;
+  background: repeating-linear-gradient(90deg, #e03a34 0 1cqw, #fff 1cqw 2cqw);
+}
+.boom-left { left: 5cqw; } .boom-right { right: 5cqw; }
+.booth { right: 9cqw; top: 20.5cqw; width: 6cqw; height: 6cqw; background: linear-gradient(135deg, #b6bac2, #8c919a); border-radius: .5cqw; box-shadow: 0 .8cqw 1.2cqw rgba(0,0,0,.4); }
+
+/* ================= BOOKING SUMMARY ================= */
+.booking-summary { padding: 18px 20px 22px; }
+.summary-title { padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.summary-title::before { content: "Booking Summary"; display: block; font-size: 20px; font-weight: 700; }
+
+.slot-info { display: flex; gap: 16px; margin: 16px 0 22px; }
+.slot-image {
+  position: relative; width: 100px; height: 143px; flex-shrink: 0; border-radius: 6px;
+  background: #3f7d37;
+}
+.slot-image::before { content: ""; position: absolute; left: 24px; right: 24px; top: 28px; bottom: 28px; background: var(--G); border: 2px solid #d8f2e3; }
+.slot-image::after  { content: ""; position: absolute; left: 36px; right: 36px; top: 40px; bottom: 40px; background: var(--W); border-radius: 12px; box-shadow: 0 0 4px rgba(0, 0, 0, .5); }
+.slot-details { position: relative; flex: 1; }
+.slot-name::before { content: "Slot A12"; font-size: 20px; font-weight: 700; }
+.slot-badge {
+  position: absolute; right: 0; top: 0; padding: 5px 14px; border-radius: 16px;
+  background: #e3f7ec; border: 1px solid #b9ebd0; color: #159a57; font-size: 14px; font-weight: 600;
+}
+.slot-badge::before { content: "Available"; }
+.slot-meta { position: relative; margin-top: 18px; height: 90px; font-size: 13px; line-height: 29px; }
+.slot-meta::before { content: "Type\A Location\A Nearest Entry"; white-space: pre; position: absolute; left: 0; top: 0; color: var(--muted); }
+.slot-meta::after  { content: "Normal Slot\A Block A - Row 1\A Main Gate"; white-space: pre; position: absolute; left: 84px; top: 0; font-weight: 500; }
+
+.summary-rows { border-top: 1px solid var(--border); padding-top: 16px; }
+.summary-row { position: relative; height: 44px; }
+.summary-row::before { position: absolute; left: 0; top: 0; font-size: 16px; color: #2b3447; line-height: 26px; white-space: pre; }
+.summary-row::after  { position: absolute; left: 160px; top: 0; font-size: 15px; color: var(--muted); line-height: 26px; white-space: pre; }
+.row-vehicle { height: 58px; }
+.row-vehicle::before  { content: "🚘    Vehicle"; top: 6px; }
+.row-vehicle::after   { content: "UK07CD4567\A Honda City (Car)"; line-height: 20px; color: var(--text); }
+.row-date::before     { content: "📅    Date"; }       .row-date::after     { content: "12 Oct 2026"; }
+.row-entry::before    { content: "🕙    Entry Time"; } .row-entry::after    { content: "10:00 AM"; }
+.row-exit::before     { content: "🕑    Exit Time"; }  .row-exit::after     { content: "02:00 PM"; }
+.row-duration::before { content: "⏳    Duration"; }   .row-duration::after { content: "4 hours"; }
+
+.charges { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 14px; }
+.charge-row { position: relative; height: 32px; font-size: 15px; }
+.charge-row::before { position: absolute; left: 6px; top: 0; color: #2b3447; }
+.charge-row::after  { position: absolute; right: 0; top: 0; color: #2b3447; }
+.charge-rate::before { content: "Parking Charge"; } .charge-rate::after { content: "₹40/hour"; }
+.charge-duration::before { content: "Duration (4 hours)"; } .charge-duration::after { content: "₹160"; }
+.total-amount { position: relative; height: 50px; margin-top: 4px; background: #e6eefc; border-radius: 6px; }
+.total-amount::before { content: "Total Amount"; position: absolute; left: 14px; top: 14px; font-weight: 700; font-size: 16px; }
+.total-amount::after  { content: "₹160"; position: absolute; right: 14px; top: 12px; color: var(--blue); font-weight: 700; font-size: 18px; }
+
+.confirm-btn, .cancel-btn {
+  height: 52px; border-radius: 8px; display: grid; place-items: center;
+  font-size: 17px; font-weight: 600; cursor: pointer;
+}
+.confirm-btn { margin-top: 34px; background: var(--blue); color: #fff; box-shadow: 0 4px 10px rgba(21, 101, 242, .3); }
+.confirm-btn::before { content: "Confirm Booking  →"; }
+.confirm-btn:hover { background: #0f55d4; }
+.cancel-btn { margin-top: 14px; border: 1.5px solid #d5dbe6; background: #fff; font-weight: 500; }
+.cancel-btn::before { content: "Cancel"; }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1150px) { .main-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px)  { .left-panel { display: none; } .form-row { grid-template-columns: 1fr; } }

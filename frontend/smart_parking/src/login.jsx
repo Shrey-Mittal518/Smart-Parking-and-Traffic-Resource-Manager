@@ -1,5 +1,5 @@
 import smartParking from "./assets/smart-parking.png";
-import './login.css';
+import './css/login.css';
 
 
 function Login()

@@ -1,0 +1,326 @@
+/* ============================================================
+   ParkingMapPage.css  –  styles for ParkingMapPage.jsx
+   All labels / icons are drawn with ::before / ::after so the
+   empty <div>s still look like the screenshot. Replace them with
+   real text/elements later if you like.
+   ============================================================ */
+
+:root {
+  --navy: #0b1f4a;
+  --blue: #1565f2;
+  --green: #1fb86a;
+  --red: #f0483e;
+  --purple: #6d4cf0;
+  --text: #1b2437;
+  --muted: #5b6577;
+  --border: #e4e8f0;
+
+  /* slot colours */
+  --W: #f2f2f2;  --K: #222428;  --R: #e03a34;  --Bc: #1f4fb8;
+  --N: #17306e;  --G: #1fb86a;  --E: #1565f2;  --Dg: #8a8f98;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; color: var(--text); background: #f6f7fb; }
+
+/* ================= LAYOUT ================= */
+.dashboard { display: flex; min-height: 100vh; }
+
+/* ================= SIDEBAR ================= */
+.left-panel {
+  width: 234px; flex-shrink: 0; padding: 14px 12px;
+  background: linear-gradient(180deg, #0b1f4a 0%, #0a1a3d 100%);
+  color: #fff;
+}
+.logo { text-align: center; padding: 4px 0 24px; }
+.logo::before {
+  content: "🚗 SPTRM"; display: block;
+  font-size: 30px; font-weight: 800; letter-spacing: .5px;
+}
+.logo::after {
+  content: "Smart Parking & Traffic\A Resource Manager";
+  white-space: pre; display: block; margin-top: 6px;
+  font-size: 15px; line-height: 1.25; color: #e6ecff;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 16px; margin-bottom: 4px;
+  font-size: 16px; color: #e8edfb; border-radius: 6px; cursor: pointer;
+}
+.nav-item:hover { background: rgba(255, 255, 255, .08); }
+.nav-item.active { background: var(--blue); color: #fff; font-weight: 600; }
+.nav-item::before { font-size: 20px; width: 24px; text-align: center; }
+.nav-item:nth-child(2)::before  { content: "🏠"; }
+.nav-item:nth-child(3)::before  { content: "🗺️"; }
+.nav-item:nth-child(4)::before  { content: "📅"; }
+.nav-item:nth-child(5)::before  { content: "📄"; }
+.nav-item:nth-child(6)::before  { content: "💳"; }
+.nav-item:nth-child(7)::before  { content: "📈"; }
+.nav-item:nth-child(8)::before  { content: "📊"; }
+.nav-item:nth-child(9)::before  { content: "👥"; }
+.nav-item:nth-child(10)::before { content: "⚙️"; }
+.nav-item:nth-child(11)::before { content: "⚙️"; }
+
+/* ================= RIGHT SIDE ================= */
+.right-panel { flex: 1; min-width: 0; padding: 0 24px 24px; }
+
+/* ---------- header ---------- */
+.header { display: flex; justify-content: space-between; align-items: flex-start; padding: 22px 0 18px; }
+.header h1 { font-size: 34px; font-weight: 700; letter-spacing: -.3px; }
+.header p  { font-size: 17px; color: var(--muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 28px; padding-top: 10px; }
+
+.notification-icon { position: relative; width: 26px; height: 26px; }
+.notification-icon::before { content: "🔔"; font-size: 22px; }
+.notification-icon::after {
+  content: ""; position: absolute; top: 0; right: 2px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+}
+.user-profile {
+  position: relative; min-width: 150px; min-height: 46px; padding-left: 58px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='23' fill='%2312306b'/%3E%3Ctext x='23' y='30' text-anchor='middle' font-size='20' font-family='sans-serif' fill='white'%3EA%3C/text%3E%3C/svg%3E") no-repeat left center / 46px 46px;
+}
+.user-profile::before { content: "Aditya Bora"; display: block; padding-top: 4px; font-size: 15px; font-weight: 700; }
+.user-profile::after  { content: "User"; display: block; font-size: 13px; color: var(--muted); }
+
+/* ---------- stat cards ---------- */
+.content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 18px; }
+.content > div {
+  position: relative; height: 104px; background-color: #fff;
+  border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, .05);
+  background-repeat: no-repeat;
+  background-position: 16px center, 104px 76px;   /* icon, sub-text */
+  background-size: 70px 70px, 150px 20px;
+}
+.content > div::before { position: absolute; left: 104px; top: 14px; font-size: 15px; color: var(--muted); }
+.content > div::after  { position: absolute; left: 104px; top: 34px; font-size: 32px; font-weight: 700; line-height: 1.15; color: var(--text); }
+
+/* icon squares + sub-text are inline SVG backgrounds */
+.total-slots       { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231565f2'/%3E%3Cpath d='M22 31l5-11h16l5 11z' fill='white'/%3E%3Crect x='15' y='30' width='40' height='16' rx='5' fill='white'/%3E%3Ccircle cx='25' cy='48' r='4.5' fill='%231565f2' stroke='white' stroke-width='2'/%3E%3Ccircle cx='45' cy='48' r='4.5' fill='%231565f2' stroke='white' stroke-width='2'/%3E%3C/svg%3E"); }
+.available-slots   { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231fb86a'/%3E%3Cpath d='M22 31l5-11h16l5 11z' fill='white'/%3E%3Crect x='15' y='30' width='40' height='16' rx='5' fill='white'/%3E%3Ccircle cx='25' cy='48' r='4.5' fill='%231fb86a' stroke='white' stroke-width='2'/%3E%3Ccircle cx='45' cy='48' r='4.5' fill='%231fb86a' stroke='white' stroke-width='2'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='20'%3E%3Ctext x='0' y='15' font-size='14' font-family='Inter,Segoe UI,sans-serif' fill='%235b6577'%3E27%25 available%3C/text%3E%3C/svg%3E"); }
+.occupied-slots    { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%23f0483e'/%3E%3Cpath d='M22 31l5-11h16l5 11z' fill='white'/%3E%3Crect x='15' y='30' width='40' height='16' rx='5' fill='white'/%3E%3Ccircle cx='25' cy='48' r='4.5' fill='%23f0483e' stroke='white' stroke-width='2'/%3E%3Ccircle cx='45' cy='48' r='4.5' fill='%23f0483e' stroke='white' stroke-width='2'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='20'%3E%3Ctext x='0' y='15' font-size='14' font-family='Inter,Segoe UI,sans-serif' fill='%235b6577'%3E71%25 occupied%3C/text%3E%3C/svg%3E"); }
+.ev-charging-slots { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%234f46e5'/%3E%3Cpolygon points='40,14 23,39 33,39 29,57 47,31 37,31' fill='white'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='20'%3E%3Ctext x='0' y='15' font-size='14' font-family='Inter,Segoe UI,sans-serif' fill='%235b6577'%3E7 available%3C/text%3E%3C/svg%3E"); }
+
+.total-slots::before       { content: "Total Slots"; top: 26px; }
+.total-slots::after        { content: "120"; top: 46px; }
+.available-slots::before   { content: "Available"; }
+.available-slots::after    { content: "32"; }
+.occupied-slots::before    { content: "Occupied"; }
+.occupied-slots::after     { content: "85"; }
+.ev-charging-slots::before { content: "EV Charging"; }
+.ev-charging-slots::after  { content: "3 / 10"; }
+
+/* ---------- map + side panel ---------- */
+.content-2 { display: grid; grid-template-columns: 1fr 248px; gap: 14px; align-items: start; }
+
+/* ================= MAP ================= */
+.map-section {
+  container-type: inline-size;            /* lets us use cqw units inside */
+  position: relative; overflow: hidden;
+  aspect-ratio: 913 / 800; border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(20, 40, 90, .15);
+  background-color: #2d3035;              /* asphalt */
+  background-image:
+    repeating-linear-gradient(180deg, #d9d9d9 0 2.2%, transparent 2.2% 4.6%),   /* centre dashes */
+    linear-gradient(#2d3035, #2d3035),                                          /* cross road */
+    linear-gradient(#4a8a3d, #4a8a3d),                                          /* grass left  */
+    linear-gradient(#4a8a3d, #4a8a3d);                                          /* grass right */
+  background-size: 0.3% 100%, 100% 7%, 42% 96%, 43% 96%;
+  background-position: 49% 0, 0 52%, 3% 50%, 97% 50%;
+  background-repeat: repeat-y, no-repeat, no-repeat, no-repeat;
+}
+.map-section > div { position: absolute; }
+
+/* toggle */
+.view-toggle {
+  top: 2cqw; left: 2cqw; z-index: 5; display: flex;
+  background: #fff; padding: .4cqw; border-radius: .9cqw;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+.view-toggle > div { position: static; padding: 1cqw 2.6cqw; font-size: 1.55cqw; border-radius: .7cqw; color: var(--text); }
+.map-view { background: var(--blue); color: #fff !important; font-weight: 600; }
+.map-view::before  { content: "Map View"; }
+.list-view::before { content: "List View"; }
+
+/* compass */
+.compass {
+  top: 2cqw; right: 2cqw; z-index: 5; width: 6.5cqw; height: 6.5cqw;
+  border-radius: 50%; background: #fff; border: .25cqw solid #1b2437;
+  display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+.compass::before { content: "▲\A N"; white-space: pre; text-align: center; font-weight: 800; font-size: 1.6cqw; line-height: 1.1; }
+
+/* roads */
+.center-road { left: 45cqw; top: 0; width: 8cqw; height: 100%; }
+.center-road::before { /* arrows */
+  content: "▲\A\A\A\A\A\A\A\A▲\A\A\A\A\A\A\A\A\A▲"; white-space: pre;
+  position: absolute; left: 50%; top: 6cqw; transform: translateX(-50%);
+  color: #fff; font-size: 1.6cqw; line-height: 2.4cqw;
+}
+.roundabout {
+  left: 44.5cqw; top: 44.5cqw; width: 9cqw; height: 9cqw; border-radius: 50%;
+  background: radial-gradient(circle, #3f8a3a 0 52%, #d7d7d7 53% 58%, #2d3035 59%);
+  border: .4cqw solid #4a4f55;
+}
+
+/* ---------- buildings (the .block-x element itself) ---------- */
+.block-a, .block-b, .block-c, .block-d {
+  background: linear-gradient(135deg, #b3b7bf, #8e939c);
+  border-radius: .5cqw; box-shadow: 0 1cqw 1.5cqw rgba(0, 0, 0, .4);
+}
+.block-a { left: 18cqw; top: 7.9cqw; width: 24cqw; height: 10.5cqw; }
+.block-b { left: 57cqw; top: 7cqw;   width: 27cqw; height: 14cqw; }
+.block-c { left: 15cqw; top: 50cqw;  width: 24cqw; height: 10.5cqw; }
+.block-d { left: 63cqw; top: 50cqw;  width: 23cqw; height: 9.6cqw; }
+
+/* white name pill */
+.block-a::before, .block-b::before, .block-c::before, .block-d::before {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  background: #fff; color: #111; font-weight: 700; font-size: 1.5cqw; white-space: nowrap;
+  padding: .6cqw 1.8cqw; border-radius: .6cqw; box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+}
+.block-a::before { content: "Block A"; }
+.block-b::before { content: "Block B"; }
+.block-c::before { content: "Block C"; }
+.block-d::before { content: "Block D"; }
+
+/* ---------- parking lots (the ::after of each building) ---------- */
+.block-a::after, .block-b::after, .block-c::after, .block-d::after {
+  content: ""; position: absolute; box-sizing: border-box;
+  border: .4cqw solid #5d9a47; border-radius: 1cqw; padding: .6cqw;
+  background-color: #3b3f45; background-repeat: no-repeat;
+  background-origin: content-box; background-clip: padding-box;
+}
+
+/* Block A – 8 slots x 2 rows */
+.block-a::after {
+  left: -7cqw; top: 17.1cqw; width: 34cqw; height: 16.5cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(12.5% - .5cqw), #3b3f45 calc(12.5% - .5cqw) 12.5%),
+    linear-gradient(90deg, var(--Bc) 0 12.5%, var(--K) 12.5% 25%, var(--R) 25% 37.5%, var(--W) 37.5% 50%, var(--G) 50% 62.5%, var(--W) 62.5% 75%, var(--G) 75% 87.5%, var(--K) 87.5% 100%),
+    linear-gradient(90deg, var(--G) 0 12.5%, var(--R) 12.5% 25%, var(--G) 25% 37.5%, var(--K) 37.5% 50%, var(--G) 50% 62.5%, var(--W) 62.5% 75%, var(--Dg) 75% 87.5%, var(--G) 87.5% 100%);
+  background-size: 100% 100%, 100% 46%, 100% 46%;
+  background-position: 0 0, 0 0, 0 100%;
+}
+
+/* Block B – 9 slots x 2 rows */
+.block-b::after {
+  left: -4cqw; top: 18cqw; width: 38cqw; height: 16.5cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(11.11% - .5cqw), #3b3f45 calc(11.11% - .5cqw) 11.11%),
+    linear-gradient(90deg, var(--W) 0 11.11%, var(--K) 11.11% 22.22%, var(--G) 22.22% 33.33%, var(--R) 33.33% 44.44%, var(--W) 44.44% 55.56%, var(--G) 55.56% 66.67%, var(--K) 66.67% 77.78%, var(--E) 77.78% 88.89%, var(--N) 88.89% 100%),
+    linear-gradient(90deg, var(--Dg) 0 11.11%, var(--G) 11.11% 22.22%, var(--R) 22.22% 33.33%, var(--G) 33.33% 44.44%, var(--K) 44.44% 55.56%, var(--K) 55.56% 66.67%, var(--E) 66.67% 77.78%, var(--N) 77.78% 88.89%, var(--R) 88.89% 100%);
+  background-size: 100% 100%, 100% 46%, 100% 46%;
+  background-position: 0 0, 0 0, 0 100%;
+}
+
+/* Block C – 7 slots x 1 row */
+.block-c::after {
+  left: -4cqw; top: 12.6cqw; width: 33cqw; height: 7.4cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(14.286% - .5cqw), #3b3f45 calc(14.286% - .5cqw) 14.286%),
+    linear-gradient(90deg, var(--W) 0 14.286%, var(--E) 14.286% 28.571%, var(--K) 28.571% 42.857%, var(--G) 42.857% 57.143%, var(--R) 57.143% 71.429%, var(--Dg) 71.429% 85.714%, var(--N) 85.714% 100%);
+  background-size: 100% 100%, 100% 100%;
+}
+
+/* Block D – 8 slots x 1 row */
+.block-d::after {
+  left: -7cqw; top: 12.2cqw; width: 33cqw; height: 7.4cqw;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(12.5% - .5cqw), #3b3f45 calc(12.5% - .5cqw) 12.5%),
+    linear-gradient(90deg, var(--K) 0 12.5%, var(--G) 12.5% 25%, var(--R) 25% 37.5%, var(--Dg) 37.5% 50%, var(--W) 50% 62.5%, var(--G) 62.5% 75%, var(--E) 75% 87.5%, var(--K) 87.5% 100%);
+  background-size: 100% 100%, 100% 100%;
+}
+
+/* ---------- gate ---------- */
+.main-gate { left: 35cqw; bottom: .5cqw; width: 30cqw; height: 10cqw; }
+.main-gate::before {
+  content: "Main Gate"; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+  background: #fff; color: #111; font-size: 1.3cqw; font-weight: 700;
+  padding: .3cqw 1cqw; border-radius: .4cqw;
+}
+.main-gate::after {
+  content: ""; position: absolute; left: 20%; right: 20%; top: 3.6cqw; height: 1.4cqw;
+  background: repeating-linear-gradient(90deg, #e03a34 0 1.2cqw, #fff 1.2cqw 2.4cqw);
+  border-radius: .3cqw; box-shadow: -2.6cqw 0 0 #f0a020, 2.6cqw 0 0 #f0a020;
+}
+.entry, .exit { top: 5.5cqw; }
+.entry { left: 0; }
+.exit  { right: 0; }
+.entry::before, .exit::before {
+  color: #fff; font-weight: 800; font-size: 2.2cqw; letter-spacing: .05cqw;
+  text-shadow: 0 1px 3px #000;
+}
+.entry::before { content: "ENTRY"; }
+.exit::before  { content: "EXIT"; }
+
+/* zoom */
+.zoom-controls {
+  left: 1.5cqw; bottom: 1.5cqw; z-index: 5; display: flex; flex-direction: column;
+  background: #fff; border-radius: .9cqw; overflow: hidden; box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+.zoom-in, .zoom-out { position: static !important; width: 5cqw; height: 5cqw; display: grid; place-items: center; font-size: 3cqw; }
+.zoom-in::before  { content: "+"; }
+.zoom-out::before { content: "−"; }
+.zoom-out { border-top: 1px solid var(--border); }
+
+/* ================= SIDE PANEL ================= */
+.side-panel { display: flex; flex-direction: column; gap: 14px; }
+.filter-slots, .legend {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px; box-shadow: 0 2px 6px rgba(20, 40, 90, .05);
+}
+
+/* filter header */
+.filter-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.filter-header::before { content: "Filter Slots"; font-size: 18px; font-weight: 700; }
+.filter-header::after  { content: "Clear All"; font-size: 14px; color: var(--blue); }
+
+/* block select */
+.filter-block::before { content: "Block"; display: block; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+.filter-block::after  {
+  content: "All Blocks                                      ⌄"; white-space: pre; overflow: hidden;
+  display: block; border: 1px solid var(--border); border-radius: 8px;
+  padding: 11px 12px; font-size: 15px;
+}
+
+/* slot type */
+.filter-slot-type { margin-top: 18px; }
+.filter-slot-type::before { content: "Slot Type"; display: block; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+.filter-slot-type::after {
+  content: "☐  🟢 Normal Slots\A☐  🔵 EV Charging\A☐  ⚪ Disabled\A☐  🟣 VIP";
+  white-space: pre; display: block; font-size: 15px; line-height: 2.1; color: #2b3447;
+}
+
+/* slot status */
+.filter-slot-status { margin-top: 12px; }
+.filter-slot-status::before { content: "Slot Status"; display: block; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+.filter-slot-status::after {
+  content: "☐  🟢 Available\A☐  🔴 Occupied";
+  white-space: pre; display: block; font-size: 15px; line-height: 2.1; color: #2b3447;
+}
+
+/* apply button */
+.apply-filters {
+  margin-top: 16px; background: var(--blue); color: #fff; border-radius: 8px;
+  padding: 13px; text-align: center; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+.apply-filters::before { content: "▽  Apply Filters"; }
+.apply-filters:hover { background: #0f55d4; }
+
+/* legend */
+.legend::before { content: "Legend"; display: block; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.legend::after {
+  content: "🟩  Available Slot\A🟥  Occupied Slot\A🟦  EV Charging Slot\A⬜  Disabled Slot\A🟪  VIP Slot\A➜   Traffic Direction";
+  white-space: pre; display: block; font-size: 14px; line-height: 2.5; color: #2b3447;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1100px) {
+  .content { grid-template-columns: repeat(2, 1fr); }
+  .content-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .left-panel { display: none; }
+}

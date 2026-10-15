@@ -1,0 +1,310 @@
+
+
+:root {
+  --blue: #1565f2;
+  --green: #1fb86a;
+  --red: #f0483e;
+  --text: #1b2437;
+  --muted: #5b6577;
+  --border: #e4e8f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; color: var(--text); background: #f6f8fc; }
+
+.dashboard { display: flex; min-height: 100vh; }
+
+/* ================= SIDEBAR ================= */
+.left-panel {
+  width: 234px; flex-shrink: 0; padding: 14px 12px;
+  background: linear-gradient(180deg, #0b1f4a 0%, #0a1a3d 100%); color: #fff;
+}
+.logo { text-align: center; padding: 4px 0 24px; }
+.logo::before { content: "🚗 SPTRM"; display: block; font-size: 30px; font-weight: 800; letter-spacing: .5px; }
+.logo::after {
+  content: "Smart Parking & Traffic\A Resource Manager"; white-space: pre; display: block;
+  margin-top: 6px; font-size: 15px; line-height: 1.25; color: #e6ecff;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 16px; padding: 14px 16px; margin-bottom: 4px;
+  font-size: 16px; color: #e8edfb; border-radius: 6px; cursor: pointer;
+}
+.nav-item:hover { background: rgba(255, 255, 255, .08); }
+.nav-item.active { background: var(--blue); color: #fff; font-weight: 600; }
+.nav-item::before { font-size: 20px; width: 24px; text-align: center; }
+.nav-item:nth-child(2)::before  { content: "🏠"; }
+.nav-item:nth-child(3)::before  { content: "🗺️"; }
+.nav-item:nth-child(4)::before  { content: "📅"; }
+.nav-item:nth-child(5)::before  { content: "📄"; }
+.nav-item:nth-child(6)::before  { content: "💳"; }
+.nav-item:nth-child(7)::before  { content: "📈"; }
+.nav-item:nth-child(8)::before  { content: "📊"; }
+.nav-item:nth-child(9)::before  { content: "👥"; }
+.nav-item:nth-child(10)::before { content: "⚙️"; }
+.nav-item:nth-child(11)::before { content: "⚙️"; }
+
+/* ================= RIGHT SIDE ================= */
+.right-panel { flex: 1; min-width: 0; padding: 0 24px 24px; }
+
+/* ---------- header ---------- */
+.header { display: flex; justify-content: space-between; align-items: flex-start; padding: 22px 0 18px; }
+.header h1 { font-size: 34px; font-weight: 700; letter-spacing: -.3px; }
+.header p  { font-size: 17px; color: var(--muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 28px; padding-top: 10px; }
+.notification-icon { position: relative; width: 26px; height: 26px; }
+.notification-icon::before { content: "🔔"; font-size: 22px; }
+.notification-icon::after {
+  content: ""; position: absolute; top: 0; right: 2px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+}
+.user-profile {
+  position: relative; min-width: 150px; min-height: 46px; padding-left: 58px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='23' fill='%2312306b'/%3E%3Ctext x='23' y='30' text-anchor='middle' font-size='20' font-family='sans-serif' fill='white'%3EA%3C/text%3E%3C/svg%3E") no-repeat left center / 46px 46px;
+}
+.user-profile::before { content: "Aditya Bora"; display: block; padding-top: 4px; font-size: 15px; font-weight: 700; }
+.user-profile::after  { content: "User"; display: block; font-size: 13px; color: var(--muted); }
+
+/* ================= STAT CARDS ================= */
+.content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.stat-card {
+  position: relative; height: 128px; background-color: #fff;
+  border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+  background-repeat: no-repeat; background-position: 20px 20px; background-size: 70px 70px;
+}
+.stat-card::before { position: absolute; left: 117px; top: 20px; font-size: 16px; color: #2b3447; }
+.stat-card::after  { position: absolute; left: 117px; top: 42px; font-size: 30px; font-weight: 700; line-height: 1.2; }
+.stat-sub { position: absolute; left: 117px; top: 86px; font-size: 14px; color: var(--muted); }
+
+.total-bookings::before     { content: "Total Bookings"; }  .total-bookings::after     { content: "12"; }
+.completed-bookings::before { content: "Completed"; }       .completed-bookings::after { content: "8"; }
+.active-bookings::before    { content: "Active"; }          .active-bookings::after    { content: "2"; }
+.cancelled-bookings::before { content: "Cancelled"; }       .cancelled-bookings::after { content: "2"; }
+.total-bookings .stat-sub::before     { content: "+ 2 this month"; color: var(--green); font-weight: 500; }
+.completed-bookings .stat-sub::before { content: "67% of total"; }
+.active-bookings .stat-sub::before    { content: "Currently ongoing"; }
+.cancelled-bookings .stat-sub::before { content: "17% of total"; }
+
+/* icon squares (inline SVG) */
+.total-bookings {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231565f2'/%3E%3Crect x='18' y='21' width='34' height='31' rx='5' fill='white'/%3E%3Crect x='25' y='15' width='4' height='10' rx='2' fill='white'/%3E%3Crect x='41' y='15' width='4' height='10' rx='2' fill='white'/%3E%3Crect x='18' y='29' width='34' height='3' fill='%231565f2' opacity='.35'/%3E%3Cg fill='%231565f2' opacity='.55'%3E%3Crect x='23' y='35' width='5' height='4' rx='1'/%3E%3Crect x='32' y='35' width='5' height='4' rx='1'/%3E%3Crect x='41' y='35' width='5' height='4' rx='1'/%3E%3Crect x='23' y='42' width='5' height='4' rx='1'/%3E%3Crect x='32' y='42' width='5' height='4' rx='1'/%3E%3Crect x='41' y='42' width='5' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+.completed-bookings {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231fb86a'/%3E%3Ccircle cx='35' cy='35' r='19' fill='white'/%3E%3Cpath d='M26 35.5l6.5 6.5L44.5 28' fill='none' stroke='%231fb86a' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.active-bookings {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%23f5882a'/%3E%3Ccircle cx='35' cy='35' r='19' fill='white'/%3E%3Cpath d='M35 24v12l8 5' fill='none' stroke='%23f5882a' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.cancelled-bookings {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%23f0483e'/%3E%3Ccircle cx='35' cy='35' r='19' fill='white'/%3E%3Cpath d='M28 28l14 14M42 28L28 42' fill='none' stroke='%23f0483e' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ================= TOOLBAR ================= */
+.toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.tabs { display: flex; gap: 12px; }
+.tab {
+  height: 40px; padding: 0 24px; border-radius: 6px; background: #edf1f8;
+  display: grid; place-items: center; font-size: 14px; cursor: pointer;
+}
+.tab.active { background: var(--blue); color: #fff; }
+.tab-all::before       { content: "All Bookings (12)"; }
+.tab-active::before    { content: "Active (2)"; }
+.tab-completed::before { content: "Completed (8)"; }
+.tab-cancelled::before { content: "Cancelled (2)"; }
+
+.search-box, .filter-date {
+  height: 44px; border: 1px solid #d5dbe6; border-radius: 8px; background: #fff;
+  display: flex; align-items: center; padding-left: 16px; font-size: 14px;
+}
+.search-box { margin-left: auto; width: 303px; color: #6c778b; }
+.search-box::before { content: "🔍   Search by slot, vehicle number..."; white-space: pre; }
+.filter-date {
+  width: 178px; margin-left: 4px;
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 18px 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b2437' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+.filter-date::before { content: "📅   Filter by Date"; white-space: pre; }
+
+/* ================= BOOKINGS TABLE ================= */
+.bookings-table {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, .04); margin-bottom: 14px;
+}
+.table-head, .booking-row {
+  display: grid; align-items: center;
+  grid-template-columns: 110px 198px 164px 203px 104px 93px 112px 1fr;
+}
+.table-head { height: 42px; padding: 0 21px; background: #f5f7fb; font-size: 15px; font-weight: 600; }
+.th-id::before       { content: "Booking ID"; }
+.th-slot::before     { content: "Slot Details"; }
+.th-vehicle::before  { content: "Vehicle Number"; }
+.th-datetime::before { content: "Date & Time"; }
+.th-duration::before { content: "Duration"; }
+.th-amount::before   { content: "Amount"; }
+.th-status::before   { content: "Status"; }
+.th-actions::before  { content: "Actions"; }
+
+.table-body { padding: 0 21px; }
+.booking-row { height: 96px; border-bottom: 1px solid #e9edf4; font-size: 15px; color: #2b3447; }
+.booking-row:last-child { border-bottom: 0; }
+
+/* slot colours per row (used by the thumbnail) */
+.r1 { --slot: #1fb86a; --car: #f4f4f4; }
+.r2 { --slot: #1b78d8; --car: #f4f4f4; }
+.r3 { --slot: #c0392f; --car: #e8332c; }
+.r4 { --slot: #c0392f; --car: #f4f4f4; }
+.r5 { --slot: #c0392f; --car: #e8332c; }
+
+/* booking id + created date */
+.c-id::before { display: block; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.c-id::after  { display: block; white-space: pre; font-size: 14px; line-height: 19px; color: var(--muted); }
+.r1 .c-id::before { content: "#BK012345"; } .r1 .c-id::after { content: "12 Oct 2026\A10:25 AM"; }
+.r2 .c-id::before { content: "#BK012336"; } .r2 .c-id::after { content: "10 Oct 2026\A02:15 PM"; }
+.r3 .c-id::before { content: "#BK012301"; } .r3 .c-id::after { content: "08 Oct 2026\A11:40 AM"; }
+.r4 .c-id::before { content: "#BK012289"; } .r4 .c-id::after { content: "05 Oct 2026\A09:10 AM"; }
+.r5 .c-id::before { content: "#BK012276"; } .r5 .c-id::after { content: "02 Oct 2026\A04:30 PM"; }
+
+/* slot thumbnail + text */
+.c-slot { display: flex; align-items: center; gap: 16px; }
+.thumb { position: relative; width: 58px; height: 70px; flex-shrink: 0; border-radius: 6px; background: #3d7a35; }
+.thumb::before { content: ""; position: absolute; left: 11px; right: 11px; top: 9px; bottom: 9px; background: var(--slot); border: 2px solid rgba(255, 255, 255, .6); }
+.thumb::after  { content: ""; position: absolute; left: 17px; right: 17px; top: 15px; bottom: 15px; background: var(--car); border-radius: 9px; box-shadow: 0 0 3px rgba(0, 0, 0, .5); }
+.slot-text::before { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.slot-text::after  { display: block; white-space: pre; font-size: 14px; line-height: 20px; color: var(--muted); }
+.r1 .slot-text::before { content: "Slot A12"; } .r1 .slot-text::after { content: "Normal Slot\A Block A - Row 1"; }
+.r2 .slot-text::before { content: "Slot C03"; } .r2 .slot-text::after { content: "EV Charging\A Block C - Row 2"; }
+.r3 .slot-text::before { content: "Slot B05"; } .r3 .slot-text::after { content: "Normal Slot\A Block B - Row 1"; }
+.r4 .slot-text::before { content: "Slot A08"; } .r4 .slot-text::after { content: "VIP Slot\A Block A - Row 3"; }
+.r5 .slot-text::before { content: "Slot D11"; } .r5 .slot-text::after { content: "Disabled Slot\A Block D - Row 1"; }
+
+/* vehicle */
+.c-vehicle {
+  padding-left: 42px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cpath d='M9 15l3-7h12l3 7z' fill='%231565f2'/%3E%3Crect x='4' y='14' width='28' height='11' rx='4' fill='%231565f2'/%3E%3Ccircle cx='11' cy='26' r='3.5' fill='%231565f2' stroke='white' stroke-width='1.5'/%3E%3Ccircle cx='25' cy='26' r='3.5' fill='%231565f2' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat left center / 34px 34px;
+}
+.c-vehicle::before { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.c-vehicle::after  { display: block; font-size: 14px; color: var(--muted); }
+.r1 .c-vehicle::before { content: "UK07CD4567"; } .r1 .c-vehicle::after { content: "Honda City"; }
+.r2 .c-vehicle::before { content: "DL09EF7890"; } .r2 .c-vehicle::after { content: "Tata Nexon (EV)"; }
+.r3 .c-vehicle::before { content: "UP16GH2345"; } .r3 .c-vehicle::after { content: "Hyundai i20"; }
+.r4 .c-vehicle::before { content: "UK07AB1234"; } .r4 .c-vehicle::after { content: "Toyota Innova"; }
+.r5 .c-vehicle::before { content: "HR26XY9876"; } .r5 .c-vehicle::after { content: "Maruti Swift"; }
+
+/* date & time, duration, amount */
+.c-datetime::before { white-space: pre; line-height: 31px; display: block; }
+.r1 .c-datetime::before { content: "📅  12 Oct 2026\A🕑  10:00 AM - 2:00 PM"; }
+.r2 .c-datetime::before { content: "📅  10 Oct 2026\A🕑  01:00 PM - 5:00 PM"; }
+.r3 .c-datetime::before { content: "📅  08 Oct 2026\A🕑  11:00 AM - 1:00 PM"; }
+.r4 .c-datetime::before { content: "📅  05 Oct 2026\A🕑  10:00 AM - 6:00 PM"; }
+.r5 .c-datetime::before { content: "📅  02 Oct 2026\A🕑  05:00 PM - 7:00 PM"; }
+
+.r1 .c-duration::before, .r2 .c-duration::before { content: "4 hours"; }
+.r3 .c-duration::before, .r5 .c-duration::before { content: "2 hours"; }
+.r4 .c-duration::before { content: "8 hours"; }
+.c-amount { font-weight: 700; color: var(--text); }
+.r1 .c-amount::before { content: "₹160"; } .r2 .c-amount::before { content: "₹220"; }
+.r3 .c-amount::before { content: "₹80"; }  .r4 .c-amount::before { content: "₹400"; }
+.r5 .c-amount::before { content: "₹80"; }
+
+/* status pill */
+.c-status::before {
+  display: inline-block; padding: 8px 17px; border-radius: 20px; font-size: 15px; font-weight: 500;
+}
+.st-active .c-status::before    { content: "Active";    background: #dcf7e7; border: 1px solid #b6ebcd; color: #159a57; }
+.st-completed .c-status::before { content: "Completed"; background: #e9edf5; color: #2b3447; }
+.st-cancelled .c-status::before { content: "Cancelled"; background: #fde8e8; border: 1px solid #f9c5c3; color: #e03a34; }
+
+/* action buttons */
+.c-actions { display: flex; gap: 8px; }
+.btn-view, .btn-cancel {
+  height: 40px; border-radius: 6px; display: grid; place-items: center;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.btn-view   { width: 66px; background: #e1ecff; color: var(--blue); }
+.btn-cancel { width: 74px; background: #fff; border: 1.5px solid #f0645c; color: #e03a34; }
+.btn-view::before   { content: "View"; }
+.btn-cancel::before { content: "Cancel"; }
+
+/* ================= BOTTOM ROW ================= */
+.bottom-grid { display: grid; grid-template-columns: 1.36fr 1fr; gap: 14px; align-items: start; }
+.history-card, .popular-card {
+  position: relative; background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+}
+
+/* ---------- booking history chart ---------- */
+.history-card { height: 214px; }
+.history-title { position: absolute; left: 17px; top: 14px; }
+.history-title::before { content: "Booking History (Last 7 Days)"; font-size: 17px; font-weight: 700; }
+.history-legend { position: absolute; right: 36px; top: 16px; font-size: 12.5px; color: #2b3447; }
+.history-legend::before { content: "🟢 Completed      🔵 Active      🔴 Cancelled"; white-space: pre; }
+
+.chart { position: absolute; left: 50px; top: 64px; right: 36px; height: 106px; }
+.y-axis { position: absolute; left: 0; top: 0; width: 30px; height: 106px; }
+.y-axis::before {
+  content: "4\A3\A2\A1\A0"; white-space: pre; position: absolute; right: 10px; top: -13px;
+  font-size: 12px; line-height: 26.5px; text-align: right; color: #4a5468;
+}
+.y-axis::after {
+  content: "Bookings"; position: absolute; left: -22px; top: 26px;
+  writing-mode: vertical-rl; transform: rotate(180deg); font-size: 12px; color: #4a5468;
+}
+.plot {
+  position: absolute; left: 50px; right: 0; top: 0; height: 107px;
+  display: grid; grid-template-columns: repeat(7, 1fr); align-items: end;
+  background: repeating-linear-gradient(to bottom, #e6e9f0 0 1px, transparent 1px 26.5px);
+  border-bottom: 1px solid #c9cfda; border-left: 1px solid #c9cfda;
+}
+.bar { position: relative; width: 36px; height: 106px; justify-self: center; }
+.bar::after {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: #4a5468; white-space: nowrap;
+}
+.bar:nth-child(1) { background: linear-gradient(to top, #1fb86a 0 26.5px, transparent 26.5px); }
+.bar:nth-child(2) { background: linear-gradient(to top, #1fb86a 0 53px, transparent 53px); }
+.bar:nth-child(3) { background: linear-gradient(to top, #1fb86a 0 53px, #f0483e 53px 79.5px, transparent 79.5px); }
+.bar:nth-child(4) { background: linear-gradient(to top, #1fb86a 0 24px, #1565f2 24px 33px, transparent 33px); }
+.bar:nth-child(5) { background: linear-gradient(to top, #1fb86a 0 26.5px, #1565f2 26.5px 58px, transparent 58px); }
+.bar:nth-child(6) { background: linear-gradient(to top, #1fb86a 0 24px, #1565f2 24px 35px, transparent 35px); }
+.bar:nth-child(7) { background: linear-gradient(to top, #1fb86a 0 53px, #1565f2 53px 79.5px, transparent 79.5px); }
+.bar:nth-child(1)::after { content: "6 Oct"; }  .bar:nth-child(2)::after { content: "7 Oct"; }
+.bar:nth-child(3)::after { content: "8 Oct"; }  .bar:nth-child(4)::after { content: "9 Oct"; }
+.bar:nth-child(5)::after { content: "10 Oct"; } .bar:nth-child(6)::after { content: "11 Oct"; }
+.bar:nth-child(7)::after { content: "12 Oct"; }
+
+/* ---------- popular slots ---------- */
+.popular-card { height: 214px; padding: 14px 22px; }
+.popular-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.popular-title::before { content: "Popular Slots"; font-size: 17px; font-weight: 700; }
+.popular-link::before  { content: "View Parking Map  →"; font-size: 12px; font-weight: 600; color: var(--blue); }
+
+.popular-row { display: grid; grid-template-columns: 66px 1fr 151px; gap: 18px; align-items: center; height: 55px; border-bottom: 1px solid #edf0f6; }
+.popular-row:last-child { border-bottom: 0; }
+.pop-thumb { position: relative; width: 66px; height: 44px; border-radius: 4px; background: #3d7a35; }
+.pop-thumb::before { content: ""; position: absolute; left: 20px; right: 20px; top: 5px; bottom: 5px; background: var(--slot); }
+.pop-thumb::after  { content: ""; position: absolute; left: 25px; right: 25px; top: 9px; bottom: 9px; background: var(--car); border-radius: 6px; box-shadow: 0 0 2px rgba(0, 0, 0, .5); }
+.pop-info::before { display: block; font-size: 15px; font-weight: 600; }
+.pop-info::after  { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.pop-stat::before { display: block; font-size: 12.5px; font-weight: 500; }
+.pop-stat::after  {
+  content: ""; display: block; height: 5px; margin-top: 8px; border-radius: 3px;
+  background: linear-gradient(90deg, #1565f2 0 var(--p), #d9e4f5 var(--p) 100%);
+}
+.pr1 { --slot: #1fb86a; --car: #f4f4f4; --p: 60%; }
+.pr2 { --slot: #c0392f; --car: #e8332c; --p: 59%; }
+.pr3 { --slot: #1b78d8; --car: #f4f4f4; --p: 48%; }
+.pr1 .pop-info::before { content: "Slot A12"; }      .pr1 .pop-info::after { content: "Block A - Row 1"; }
+.pr2 .pop-info::before { content: "Slot B05"; }      .pr2 .pop-info::after { content: "Block B - Row 1"; }
+.pr3 .pop-info::before { content: "Slot C03 (EV)"; } .pr3 .pop-info::after { content: "Block C - Row 2"; }
+.pr1 .pop-stat::before { content: "Booked 18 times"; }
+.pr2 .pop-stat::before { content: "Booked 15 times"; }
+.pr3 .pop-stat::before { content: "Booked 12 times"; }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1200px) {
+  .content { grid-template-columns: repeat(2, 1fr); }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .bookings-table { overflow-x: auto; }
+  .table-head, .table-body { min-width: 1100px; }
+}
+@media (max-width: 760px) { .left-panel { display: none; } .toolbar { flex-wrap: wrap; } }

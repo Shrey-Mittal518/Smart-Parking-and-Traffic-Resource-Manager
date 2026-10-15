@@ -1,26 +1,31 @@
-
+/* ---------- Page shell ---------- */
 .dashboard {
   position: fixed;
   inset: 0;
   z-index: 1;
   display: flex;
+  overflow: hidden;
   background: #f1f6fc;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   color: #111827;
 }
 
-
+/* ---------- Sidebar ---------- */
 .left-panel {
   flex: 0 0 234px;
+  width: 234px;
+  min-width: 234px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 0 12px 20px;
   background: linear-gradient(180deg, #14305e 0%, #0e2347 100%);
   color: #e6edf9;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
+/* .left-panel prefix beats the global .logo rule from login.css */
 .left-panel .logo {
   flex-shrink: 0;
   width: auto;
@@ -41,16 +46,21 @@
 
 .left-panel .logo::after {
   content: "Smart Parking & Traffic Resource Manager";
+  display: block;
   max-width: 170px;
   margin-top: 4px;
   font-size: 13px;
   line-height: 1.3;
+  white-space: normal;
+  text-align: center;
   color: #dbe6f7;
 }
 
 .nav-item {
-  position: relative;
-  padding: 13px 16px 13px 62px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
   font-size: 15px;
   font-weight: 500;
   border-radius: 8px;
@@ -58,31 +68,23 @@
   transition: background 0.2s;
 }
 
-.nav-item::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 50%;
+.nav-icon {
+  flex: 0 0 22px;
   width: 22px;
   height: 22px;
-  transform: translateY(-50%);
-  border: 2px solid currentColor;
-  border-radius: 5px;
-  opacity: 0.85;
 }
 
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
-
-.logo + .nav-item,
-.logo + .nav-item:hover {
+.nav-item.active,
+.nav-item.active:hover {
   background: #1a66f2;
   color: #fff;
 }
 
-
+/* ---------- Main area ---------- */
 .right-panel {
   flex: 1;
   min-width: 0;
@@ -93,7 +95,7 @@
   overflow-y: auto;
 }
 
-
+/* ---------- Header (works even with the ClassName typo) ---------- */
 .header,
 .right-panel > div:has(> .header-left) {
   flex-shrink: 0;
@@ -122,6 +124,7 @@
   gap: 40px;
 }
 
+/* bell with red dot */
 .notification-icon {
   position: relative;
   width: 26px;
@@ -141,7 +144,7 @@
   border-radius: 50%;
 }
 
-
+/* avatar + name */
 .user-profile {
   display: flex;
   align-items: center;
@@ -170,6 +173,7 @@
   line-height: 1.4;
 }
 
+/* ---------- Shared card look ---------- */
 .Total-slots,
 .Available-slots,
 .Occupied-slots,
@@ -185,6 +189,7 @@
   box-shadow: 0 2px 8px rgba(30, 64, 175, 0.05);
 }
 
+/* ---------- Row 1: stat cards ---------- */
 .Content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -217,7 +222,7 @@
 .Occupied-slots::before    { background: #f2493f; }
 .Ev-charging-slots::before { background: #5b4fe6; }
 
-
+/* ---------- Row 2: map + activity ---------- */
 .content-2 {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
@@ -236,7 +241,7 @@
   display: block;
 }
 
-
+/* ---------- Row 3: occupancy, traffic, quick actions ---------- */
 .content-3 {
   display: grid;
   grid-template-columns: 1fr 1.05fr 0.95fr;
@@ -278,7 +283,7 @@
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
-
+/* chevron on each action */
 .action-1::after,
 .action-2::after,
 .action-3::after,
@@ -300,7 +305,7 @@
   box-shadow: 0 4px 14px rgba(26, 102, 242, 0.15);
 }
 
-
+/* ---------- Smaller screens ---------- */
 @media (max-width: 1200px) {
   .Content { grid-template-columns: repeat(2, 1fr); }
   .content-2,
@@ -308,10 +313,21 @@
 }
 
 @media (max-width: 800px) {
-  .left-panel { flex-basis: 76px; }
-  .nav-item { height: 48px; padding-left: 0; font-size: 0; }
-  .nav-item::before { left: 27px; }
+  .left-panel {
+    flex-basis: 76px;
+    width: 76px;
+    min-width: 76px;
+  }
+  .nav-item {
+    justify-content: center;
+    padding: 14px 0;
+  }
+  .nav-item span { display: none; }
   .left-panel .logo::after { display: none; }
   .left-panel .logo::before { font-size: 14px; }
   .header-left p { display: none; }
+}
+
+.user-profile::before {
+  display: none;
 }

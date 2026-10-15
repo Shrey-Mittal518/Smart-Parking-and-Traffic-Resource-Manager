@@ -1,0 +1,309 @@
+
+:root {
+  --blue: #1565f2;
+  --green: #1fb86a;
+  --red: #f0483e;
+  --orange: #f5882a;
+  --purple: #7b4df0;
+  --text: #1b2437;
+  --muted: #5b6577;
+  --border: #e4e8f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; color: var(--text); background: #f6f8fc; }
+
+.dashboard { display: flex; min-height: 100vh; }
+
+/* ================= SIDEBAR ================= */
+.left-panel {
+  width: 234px; flex-shrink: 0; padding: 14px 12px;
+  background: linear-gradient(180deg, #0b1f4a 0%, #0a1a3d 100%); color: #fff;
+}
+.logo { text-align: center; padding: 4px 0 24px; }
+.logo::before { content: "🚗 SPTRM"; display: block; font-size: 30px; font-weight: 800; letter-spacing: .5px; }
+.logo::after {
+  content: "Smart Parking & Traffic\A Resource Manager"; white-space: pre; display: block;
+  margin-top: 6px; font-size: 15px; line-height: 1.25; color: #e6ecff;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 16px; padding: 14px 16px; margin-bottom: 4px;
+  font-size: 16px; color: #e8edfb; border-radius: 6px; cursor: pointer;
+}
+.nav-item:hover { background: rgba(255, 255, 255, .08); }
+.nav-item.active { background: var(--blue); color: #fff; font-weight: 600; }
+.nav-item::before { font-size: 20px; width: 24px; text-align: center; }
+.nav-item:nth-child(2)::before  { content: "🏠"; }
+.nav-item:nth-child(3)::before  { content: "🗺️"; }
+.nav-item:nth-child(4)::before  { content: "📅"; }
+.nav-item:nth-child(5)::before  { content: "📄"; }
+.nav-item:nth-child(6)::before  { content: "💳"; }
+.nav-item:nth-child(7)::before  { content: "📈"; }
+.nav-item:nth-child(8)::before  { content: "📊"; }
+.nav-item:nth-child(9)::before  { content: "👥"; }
+.nav-item:nth-child(10)::before { content: "⚙️"; }
+.nav-item:nth-child(11)::before { content: "⚙️"; }
+
+/* ================= RIGHT SIDE ================= */
+.right-panel { flex: 1; min-width: 0; padding: 0 24px 24px; }
+
+/* ---------- header ---------- */
+.header { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 0 14px; }
+.header h1 { font-size: 34px; font-weight: 700; letter-spacing: -.3px; }
+.header p  { font-size: 17px; color: var(--muted); margin-top: 2px; }
+.header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.header-top { display: flex; align-items: center; gap: 28px; padding-top: 6px; }
+.header-actions { display: flex; gap: 14px; }
+.notification-icon { position: relative; width: 26px; height: 26px; }
+.notification-icon::before { content: "🔔"; font-size: 22px; }
+.notification-icon::after {
+  content: ""; position: absolute; top: 0; right: 2px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+}
+.user-profile {
+  position: relative; min-width: 150px; min-height: 46px; padding-left: 58px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='23' fill='%2312306b'/%3E%3Ctext x='23' y='30' text-anchor='middle' font-size='20' font-family='sans-serif' fill='white'%3EA%3C/text%3E%3C/svg%3E") no-repeat left center / 46px 46px;
+}
+.user-profile::before { content: "Aditya Bora"; display: block; padding-top: 4px; font-size: 15px; font-weight: 700; }
+.user-profile::after  { content: "User"; display: block; font-size: 13px; color: var(--muted); }
+
+.date-range {
+  width: 250px; height: 40px; background: #fff; border: 1px solid #d5dbe6; border-radius: 8px;
+  display: flex; align-items: center; padding-left: 14px; font-size: 14px;
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 18px 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b2437' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+.date-range::before { content: "📅  01 Oct 2026 - 12 Oct 2026"; white-space: pre; }
+.export-btn {
+  width: 166px; height: 40px; background: var(--blue); color: #fff; border-radius: 8px;
+  display: grid; place-items: center; font-size: 15px; font-weight: 500; cursor: pointer;
+}
+.export-btn::before { content: "⬇  Export Report"; white-space: pre; }
+.export-btn:hover { background: #0f55d4; }
+
+/* ================= STAT CARDS ================= */
+.content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 14px; }
+.stat-card {
+  position: relative; height: 126px; background-color: #fff;
+  border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+  background-repeat: no-repeat; background-position: 19px 20px; background-size: 70px 70px;
+}
+.stat-card::before { position: absolute; left: 116px; top: 22px; font-size: 14.5px; color: #2b3447; }
+.stat-card::after  { position: absolute; left: 116px; top: 40px; font-size: 30px; font-weight: 700; line-height: 1.2; }
+.stat-sub { position: absolute; left: 116px; top: 88px; font-size: 14px; color: var(--muted); }
+.total-vehicles::before { content: "Total Vehicles"; }               .total-vehicles::after { content: "1,248"; }
+.total-revenue::before  { content: "Total Revenue"; }                .total-revenue::after  { content: "₹24,560"; }
+.avg-duration::before   { content: "Average Parking Duration"; }     .avg-duration::after   { content: "3.2 hours"; }
+.peak-hour::before      { content: "Peak Hour"; }                    .peak-hour::after      { content: "12 PM - 2 PM"; font-size: 28px; }
+.total-vehicles .stat-sub::before { content: "↑ 12% from last week"; color: var(--green); }
+.total-revenue .stat-sub::before  { content: "↑ 18% from last week"; color: var(--green); }
+.avg-duration .stat-sub::before   { content: "↓ 8% from last week";  color: var(--red); }
+.peak-hour .stat-sub::before      { content: "Highest vehicle inflow"; }
+
+.total-vehicles {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231565f2'/%3E%3Cpath d='M22 31l5-11h16l5 11z' fill='white'/%3E%3Crect x='15' y='30' width='40' height='16' rx='5' fill='white'/%3E%3Ccircle cx='25' cy='48' r='4.5' fill='%231565f2' stroke='white' stroke-width='2'/%3E%3Ccircle cx='45' cy='48' r='4.5' fill='%231565f2' stroke='white' stroke-width='2'/%3E%3C/svg%3E");
+}
+.total-revenue {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%231fb86a'/%3E%3Crect x='17' y='24' width='36' height='26' rx='5' fill='white'/%3E%3Crect x='20' y='19' width='26' height='8' rx='3' fill='white' opacity='.75'/%3E%3Crect x='39' y='32' width='17' height='11' rx='4' fill='%231fb86a' stroke='white' stroke-width='2'/%3E%3Ccircle cx='45' cy='37.5' r='2.2' fill='white'/%3E%3C/svg%3E");
+}
+.avg-duration {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%23f5882a'/%3E%3Ccircle cx='35' cy='35' r='19' fill='white'/%3E%3Cpath d='M35 24v12l8 5' fill='none' stroke='%23f5882a' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.peak-hour {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'%3E%3Crect width='70' height='70' rx='10' fill='%237b4df0'/%3E%3Ccircle cx='35' cy='26' r='6.5' fill='white'/%3E%3Ccircle cx='21.5' cy='30' r='5' fill='white' opacity='.85'/%3E%3Ccircle cx='48.5' cy='30' r='5' fill='white' opacity='.85'/%3E%3Cpath d='M23 50c0-8 5-13 12-13s12 5 12 13z' fill='white'/%3E%3Cpath d='M13 47c0-6 4-9 9-9v9zM57 47c0-6-4-9-9-9v9z' fill='white' opacity='.85'/%3E%3C/svg%3E");
+}
+
+/* ================= CARDS / CHART PARTS ================= */
+.card {
+  position: relative; background: #fff; border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: 0 2px 6px rgba(20, 40, 90, .04);
+}
+.card-title::before { font-size: 17px; font-weight: 700; }
+.chart-card-title, .trend-card .card-title, .occupancy-card .card-title,
+.slot-usage-card .card-title, .revenue-card .card-title, .vehicle-dist-card .card-title {
+  position: absolute; left: 22px; top: 17px;
+}
+.chart-legend { position: absolute; right: 22px; top: 20px; font-size: 14px; color: #2b3447; }
+
+.charts-row-1 { display: grid; grid-template-columns: .95fr 1fr; gap: 14px; margin-bottom: 14px; }
+.charts-row-1 .card { height: 268px; }
+.charts-row-2 { display: grid; grid-template-columns: 404fr 410fr 336fr; gap: 14px; margin-bottom: 14px; }
+.charts-row-2 .card { height: 226px; }
+
+.trend-card .card-title::before     { content: "Vehicle In/Out Trend"; }
+.occupancy-card .card-title::before { content: "Slot Occupancy by Time"; }
+.slot-usage-card .card-title::before   { content: "Slot Type Usage"; }
+.revenue-card .card-title::before      { content: "Revenue Trend"; }
+.vehicle-dist-card .card-title::before { content: "Vehicle Type Distribution"; }
+.trend-card .chart-legend::before     { content: "🔵 Vehicles In      🟢 Vehicles Out"; white-space: pre; }
+.occupancy-card .chart-legend::before { content: "🟥 Occupied      🟩 Available"; white-space: pre; }
+
+/* ---------- axes + plots ---------- */
+.chart { position: absolute; }
+.y-axis { position: absolute; top: 0; }
+.y-axis::before { white-space: pre; position: absolute; right: 0; text-align: right; font-size: 14px; color: #4a5468; }
+.y-axis::after  {
+  position: absolute; left: 0; top: 14px; writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 13px; color: #4a5468;
+}
+.plot { position: absolute; top: 0; border-left: 1px solid #c9cfda; border-bottom: 1px solid #c9cfda; }
+.x-axis { position: absolute; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 14px; color: #4a5468; }
+
+/* --- vehicle in/out line chart --- */
+.trend-card .chart { left: 83px; top: 65px; right: 22px; height: 154px; }
+.trend-card .y-axis { left: -60px; width: 45px; height: 154px; }
+.trend-card .y-axis::before { content: "200\A150\A100\A50\A0"; top: -19px; line-height: 38.5px; }
+.trend-card .y-axis::after  { content: "Number of Vehicles"; }
+.plot-line {
+  left: 0; right: 0; height: 155px;
+  background-repeat: no-repeat; background-size: 100% 100%, 100% 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 154' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231565f2' stop-opacity='.28'/%3E%3Cstop offset='1' stop-color='%231565f2' stop-opacity='.04'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231fb86a' stop-opacity='.28'/%3E%3Cstop offset='1' stop-color='%231fb86a' stop-opacity='.04'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon fill='url(%23a)' points='3,119 74,59 143,38 208,65 276,26 337,47 399,38 457,76 457,154 3,154'/%3E%3Cpolygon fill='url(%23b)' points='3,143 74,102 143,83 208,102 276,61 337,102 399,89 457,119 457,154 3,154'/%3E%3Cpolyline fill='none' stroke='%231565f2' stroke-width='2.5' points='3,119 74,59 143,38 208,65 276,26 337,47 399,38 457,76'/%3E%3Cpolyline fill='none' stroke='%231fb86a' stroke-width='2.5' points='3,143 74,102 143,83 208,102 276,61 337,102 399,89 457,119'/%3E%3Cg fill='white' stroke-width='2.5'%3E%3Cg stroke='%231565f2'%3E%3Ccircle cx='3' cy='119' r='4'/%3E%3Ccircle cx='74' cy='59' r='4'/%3E%3Ccircle cx='143' cy='38' r='4'/%3E%3Ccircle cx='208' cy='65' r='4'/%3E%3Ccircle cx='276' cy='26' r='4'/%3E%3Ccircle cx='337' cy='47' r='4'/%3E%3Ccircle cx='399' cy='38' r='4'/%3E%3Ccircle cx='457' cy='76' r='4'/%3E%3C/g%3E%3Cg stroke='%231fb86a'%3E%3Ccircle cx='3' cy='143' r='4'/%3E%3Ccircle cx='74' cy='102' r='4'/%3E%3Ccircle cx='143' cy='83' r='4'/%3E%3Ccircle cx='208' cy='102' r='4'/%3E%3Ccircle cx='276' cy='61' r='4'/%3E%3Ccircle cx='337' cy='102' r='4'/%3E%3Ccircle cx='399' cy='89' r='4'/%3E%3Ccircle cx='457' cy='119' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    repeating-linear-gradient(to bottom, #e9ecf3 0 1px, transparent 1px 38.5px);
+}
+.trend-card .x-axis { top: 168px; }
+.trend-card .xl:nth-child(1)::before { content: "6 Oct"; }  .trend-card .xl:nth-child(2)::before { content: "7 Oct"; }
+.trend-card .xl:nth-child(3)::before { content: "8 Oct"; }  .trend-card .xl:nth-child(4)::before { content: "9 Oct"; }
+.trend-card .xl:nth-child(5)::before { content: "10 Oct"; } .trend-card .xl:nth-child(6)::before { content: "11 Oct"; }
+.trend-card .xl:nth-child(7)::before { content: "12 Oct"; }
+
+/* --- slot occupancy grouped bars --- */
+.occupancy-card .chart { left: 76px; top: 65px; right: 20px; height: 154px; }
+.occupancy-card .y-axis { left: -60px; width: 45px; height: 154px; }
+.occupancy-card .y-axis::before { content: "100\A80\A60\A40\A20\A0"; top: -15px; line-height: 30.8px; }
+.occupancy-card .y-axis::after  { content: "Number of Slots"; }
+.plot-groups {
+  left: 0; right: 0; height: 155px; display: grid; grid-template-columns: repeat(6, 1fr); align-items: end;
+  background: repeating-linear-gradient(to bottom, #e9ecf3 0 1px, transparent 1px 30.8px);
+}
+.grp {
+  width: 57px; height: 154px; justify-self: center;
+  background:
+    linear-gradient(#f0483e, #f0483e) 0 100% / 26px var(--r) no-repeat,
+    linear-gradient(#1fb86a, #1fb86a) 100% 100% / 26px var(--a) no-repeat;
+}
+.grp:nth-child(1) { --r: 18px;  --a: 40px; }
+.grp:nth-child(2) { --r: 72px;  --a: 55px; }
+.grp:nth-child(3) { --r: 127px; --a: 102px; }
+.grp:nth-child(4) { --r: 127px; --a: 86px; }
+.grp:nth-child(5) { --r: 73px;  --a: 55px; }
+.grp:nth-child(6) { --r: 33px;  --a: 19px; }
+.occupancy-card .x-axis { top: 168px; }
+.occupancy-card .x-axis { justify-content: space-around; }
+.occupancy-card .xl:nth-child(1)::before { content: "6 AM"; }  .occupancy-card .xl:nth-child(2)::before { content: "9 AM"; }
+.occupancy-card .xl:nth-child(3)::before { content: "12 PM"; } .occupancy-card .xl:nth-child(4)::before { content: "3 PM"; }
+.occupancy-card .xl:nth-child(5)::before { content: "6 PM"; }  .occupancy-card .xl:nth-child(6)::before { content: "9 PM"; }
+
+/* --- revenue bars --- */
+.revenue-card .chart { left: 80px; top: 67px; right: 30px; height: 120px; }
+.revenue-card .y-axis { left: -50px; width: 36px; height: 120px; }
+.revenue-card .y-axis::before { content: "8K\A6K\A4K\A2K\A0"; top: -15px; line-height: 30px; }
+.revenue-card .y-axis::after  { content: "Revenue (₹)"; left: -22px; }
+.plot-revenue {
+  left: 0; right: 0; height: 121px; display: grid; grid-template-columns: repeat(7, 1fr); align-items: end;
+  background: repeating-linear-gradient(to bottom, #e9ecf3 0 1px, transparent 1px 30px);
+}
+.rbar { width: 31px; justify-self: center; background: var(--purple); border-radius: 2px 2px 0 0; }
+.rbar:nth-child(1) { height: 59px; }  .rbar:nth-child(2) { height: 72px; }
+.rbar:nth-child(3) { height: 80px; }  .rbar:nth-child(4) { height: 51px; }
+.rbar:nth-child(5) { height: 59px; }  .rbar:nth-child(6) { height: 80px; }
+.rbar:nth-child(7) { height: 112px; }
+.revenue-card .x-axis { top: 128px; font-size: 12.5px; }
+.revenue-card .xl:nth-child(1)::before { content: "6 Oct"; }  .revenue-card .xl:nth-child(2)::before { content: "7 Oct"; }
+.revenue-card .xl:nth-child(3)::before { content: "8 Oct"; }  .revenue-card .xl:nth-child(4)::before { content: "9 Oct"; }
+.revenue-card .xl:nth-child(5)::before { content: "10 Oct"; } .revenue-card .xl:nth-child(6)::before { content: "11 Oct"; }
+.revenue-card .xl:nth-child(7)::before { content: "12 Oct"; }
+
+/* ---------- donuts ---------- */
+.donut { position: absolute; left: 18px; top: 54px; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; }
+.donut-hole {
+  width: 100px; height: 100px; border-radius: 50%; background: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.donut-hole::before { font-size: 25px; font-weight: 700; line-height: 1.15; }
+.donut-hole::after  { font-size: 13.5px; color: var(--muted); }
+.donut-slots {
+  background: conic-gradient(#1565f2 0 75%, #1fb86a 75% 83%, #f5882a 83% 87%, #7b4df0 87% 91%, #a3a8b4 91% 100%);
+}
+.donut-slots .donut-hole::before { content: "120"; }
+.donut-slots .donut-hole::after  { content: "Total Slots"; }
+.donut-vehicles {
+  top: 56px;
+  background: conic-gradient(#1565f2 0 72%, #1fb86a 72% 90%, #f5882a 90% 96%, #f0483e 96% 98%, #a3a8b4 98% 100%);
+}
+.donut-vehicles .donut-hole::before { content: "1,248"; }
+.donut-vehicles .donut-hole::after  { content: "Total Vehicles"; font-size: 12.5px; }
+
+.legend-list { position: absolute; font-size: 14px; color: #2b3447; }
+.legend-list::before, .legend-list::after { white-space: pre; display: block; }
+.legend-list::after { position: absolute; right: 0; top: 0; text-align: right; }
+.slot-usage-card .legend-list { left: 194px; top: 56px; width: 188px; line-height: 29px; }
+.slot-usage-card .legend-list::before { content: "🔵  Normal Slots\A🟢  EV Charging\A🟠  Disabled Slots\A🟣  VIP Slots\A⚪  Others"; }
+.slot-usage-card .legend-list::after  { content: "90 (75%)\A10 (8%)\A5 (4%)\A5 (4%)\A10 (9%)"; }
+.vehicle-dist-card .legend-list { left: 192px; top: 58px; width: 118px; line-height: 30px; }
+.vehicle-dist-card .legend-list::before { content: "🔵  Car\A🟢  Bike\A🟠  EV\A🔴  Bus\A⚪  Others"; }
+.vehicle-dist-card .legend-list::after  { content: "72%\A18%\A6%\A2%\A2%"; }
+
+/* ================= TABLES ================= */
+.tables-row { display: grid; grid-template-columns: 710fr 454fr; gap: 14px; align-items: start; }
+.tx-card, .top-card { padding: 16px 15px 12px; height: 272px; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; padding: 0 2px; }
+.card-link::before { content: "View All"; font-size: 14px; font-weight: 600; color: var(--blue); }
+.tx-card .card-title::before  { content: "Recent Parking Transactions"; }
+.top-card .card-title::before { content: "Top Occupied Slots"; }
+
+.tx-table, .top-table {
+  display: grid; font-size: 12.5px; color: #2b3447;
+  background: repeating-linear-gradient(to bottom, transparent 0 35px, #e9edf4 35px 36px) 0 31px / 100% calc(100% - 31px) no-repeat;
+}
+.tx-table  { grid-template-columns: 34px 104px 56px 115px 117px 77px 78px 1fr; }
+.top-table { grid-template-columns: 48px 59px 106px 121px 1fr; }
+.col::before {
+  display: block; height: 31px; line-height: 31px; background: #f4f6fa;
+  font-size: 12.5px; font-weight: 700; color: var(--text);
+}
+.col::after { display: block; white-space: pre; line-height: 36px; }
+.tx-table .col:first-child::before, .top-table .col:first-child::before { padding-left: 10px; }
+.tx-table .col:first-child::after,  .top-table .col:first-child::after  { padding-left: 10px; }
+
+/* recent transactions */
+.tx-table .col:nth-child(1)::before { content: "#"; }              .tx-table .col:nth-child(1)::after { content: "1\A2\A3\A4\A5"; }
+.tx-table .col:nth-child(2)::before { content: "Vehicle Number"; }  .tx-table .col:nth-child(2)::after { content: "UK07CD4567\ADL09EF7890\AUP16GH2345\AUK07AB1234\AHR26XY9876"; }
+.tx-table .col:nth-child(3)::before { content: "Slot ID"; }         .tx-table .col:nth-child(3)::after { content: "A12\AC03\AB05\AA08\AD11"; }
+.tx-table .col:nth-child(4)::before { content: "Entry Time"; }      .tx-table .col:nth-child(4)::after { content: "12 Oct, 10:00 AM\A12 Oct, 11:30 AM\A12 Oct, 9:15 AM\A12 Oct, 8:50 AM\A12 Oct, 7:20 AM"; }
+.tx-table .col:nth-child(5)::before { content: "Exit Time"; }       .tx-table .col:nth-child(5)::after { content: "12 Oct, 2:00 PM\A-\A12 Oct, 11:15 AM\A-\A12 Oct, 9:20 AM"; }
+.tx-table .col:nth-child(6)::before { content: "Duration"; }        .tx-table .col:nth-child(6)::after { content: "4h 0m\A-\A2h 0m\A-\A2h 0m"; }
+.tx-table .col:nth-child(7)::before { content: "Amount"; }          .tx-table .col:nth-child(7)::after { content: "₹160\A-\A₹80\A-\A₹80"; }
+.tx-table .col:nth-child(8)::before { content: "Status"; }
+
+/* top occupied slots */
+.top-table .col:nth-child(1)::before { content: "Rank"; }          .top-table .col:nth-child(1)::after { content: "1\A2\A3\A4\A5"; }
+.top-table .col:nth-child(2)::before { content: "Slot ID"; }       .top-table .col:nth-child(2)::after { content: "A12\AB05\AC03\AA08\AD11"; }
+.top-table .col:nth-child(3)::before { content: "Type"; }
+.top-table .col:nth-child(4)::before { content: "Block - Row"; }   .top-table .col:nth-child(4)::after { content: "Block A - Row 1\ABlock B - Row 1\ABlock C - Row 2\ABlock A - Row 3\ABlock D - Row 1"; }
+.top-table .col:nth-child(5)::before { content: "Usage Count"; }   .top-table .col:nth-child(5)::after { content: "48\A45\A38\A32\A28"; }
+
+/* status / type pills */
+.pill {
+  height: 24px; margin: 6px 0; padding: 0 12px; border-radius: 5px; display: flex; align-items: center;
+  width: fit-content; font-size: 12.5px; font-weight: 500;
+}
+.pill.ok::before       { content: "Completed"; }
+.pill.act::before      { content: "Active"; }
+.pill.normal::before   { content: "Normal"; }
+.pill.ev::before       { content: "EV Charging"; }
+.pill.vip::before      { content: "VIP"; }
+.pill.disabled::before { content: "Disabled"; }
+.pill.ok, .pill.ev          { background: #dcf7e7; border: 1px solid #b6ebcd; color: #159a57; }
+.pill.act, .pill.normal     { background: #e1ecff; border: 1px solid #c7dbff; color: #1565f2; }
+.pill.vip                   { background: #ece4ff; border: 1px solid #d9c9ff; color: #6d3df0; }
+.pill.disabled              { background: #fde3e2; border: 1px solid #f9c5c3; color: #e03a34; }
+.pill.ok, .pill.act { min-width: 84px; justify-content: center; }
+.pill.normal, .pill.ev, .pill.vip, .pill.disabled { min-width: 72px; justify-content: center; }
+
+
+@media (max-width: 1250px) {
+  .content { grid-template-columns: repeat(2, 1fr); }
+  .charts-row-1, .charts-row-2, .tables-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) { .left-panel { display: none; } }
