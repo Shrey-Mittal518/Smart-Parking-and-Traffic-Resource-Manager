@@ -231,12 +231,3 @@ npm run dev        # Vite dev server — http://localhost:5173
 |---|---|---|
 | Admin | `admin@sptrm.com` | `admin123` |
 | User | `shrey@sptrm.com` | `user123` |
-
-> ⚠️ Change these before any deployment.
-
----
-
-## 👥 Team
-
-**Team Levengers** — Graphic Era University, Dehradun  
-Academic Session 2026-27 | Operating Systems + DBMS Project
