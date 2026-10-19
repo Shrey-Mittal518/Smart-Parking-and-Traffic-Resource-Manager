@@ -1,4 +1,4 @@
-# 🚗 Smart Parking & Traffic Resource Manager (SPTRM)
+# Smart Parking & Traffic Resource Manager (SPTRM)
 
 > **Team Levengers** | OS + DBMS Academic Project | Session 2026-27
 
@@ -6,7 +6,7 @@ A full-stack smart parking system that simulates real Operating System concepts 
 
 ---
 
-## 📌 Table of Contents
+##  Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
@@ -20,7 +20,7 @@ A full-stack smart parking system that simulates real Operating System concepts 
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Details |
 |---|---|
@@ -37,7 +37,7 @@ A full-stack smart parking system that simulates real Operating System concepts 
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 **Frontend**
 - React 19 + Vite 8
@@ -57,7 +57,7 @@ A full-stack smart parking system that simulates real Operating System concepts 
 
 ---
 
-## 🏗 Architecture Overview
+##  Architecture Overview
 
 ```
 ┌──────────────────────┐        REST API (JSON)       ┌──────────────────────┐
@@ -79,7 +79,7 @@ A full-stack smart parking system that simulates real Operating System concepts 
 
 ---
 
-## ⚙️ OS Concepts Implemented
+##  OS Concepts Implemented
 
 ### Synchronisation
 - **Mutex** — per-slot binary lock; only one booking transaction can enter the critical section for a given slot at a time.
@@ -101,7 +101,7 @@ Each scheduling run returns `waitingMs`, `turnaroundMs`, and aggregate averages 
 
 ---
 
-## 🗄 Database Design
+##  Database Design
 
 ### Tables (3NF Normalised)
 | Table | Purpose |
@@ -124,7 +124,7 @@ Each scheduling run returns `waitingMs`, `turnaroundMs`, and aggregate averages 
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Smart-Parking-and-Traffic-Resource-Manager/
@@ -160,7 +160,7 @@ Smart-Parking-and-Traffic-Resource-Manager/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js ≥ 18
@@ -206,7 +206,7 @@ npm run dev        # Vite dev server — http://localhost:5173
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
@@ -225,7 +225,7 @@ npm run dev        # Vite dev server — http://localhost:5173
 
 ---
 
-## 🔑 Seed Credentials
+##  Seed Credentials
 
 | Role | Email | Password |
 |---|---|---|
