@@ -1,21 +1,20 @@
 {
-  "name": "sptrm-backend",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Smart Parking & Traffic Resource Manager Backend with OS Simulation & ACID Transactions",
+  "description": "SPTRM backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "node --watch server.js"
   },
+  "keywords": [],
+  "type": "commonjs",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.9.7"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6"
   }
-} 
+}

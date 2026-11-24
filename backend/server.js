@@ -1,51 +1,20 @@
-// ============================================================
-// SPTRM – Express Server
-// Entry point: authentication + all route mounts
-// ============================================================
-require('dotenv').config({ path: './file.env' });
+require('dotenv').config();
 
-const express = require('express');
-const cors    = require('cors');
+const app = require('./src/app');
+const { initDb } = require('./src/config/db');
+const { seedSlotsIfEmpty } = require('./src/services/dbService');
+const { slots } = require('./src/data/store');
 
-const authRoutes        = require('./routes/auth');
-const parkingRoutes     = require('./routes/parking');
-const reservationRoutes = require('./routes/reservations');
-const schedulerRoutes   = require('./routes/scheduler');
-const adminRoutes       = require('./routes/admin');
+const PORT = process.env.PORT || 3000;
 
-const app  = express();
-const PORT = process.env.PORT || 5000;
-
-// ─── Middleware ───────────────────────────────────────────────
-app.use(cors());
-app.use(express.json());
-
-// ─── Routes ──────────────────────────────────────────────────
-app.use('/api/auth',         authRoutes);
-app.use('/api/parking',      parkingRoutes);
-app.use('/api/reservations', reservationRoutes);
-app.use('/api/scheduler',    schedulerRoutes);
-app.use('/api/admin',        adminRoutes);
-
-// ─── Health check ────────────────────────────────────────────
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', project: 'SPTRM Phase-II', timestamp: new Date() });
-});
-
-// ─── Global error handler ────────────────────────────────────
-app.use((err, _req, res, _next) => {
-  console.error('[SPTRM ERROR]', err.message);
-  res.status(500).json({ error: err.message });
-});
-
-app.listen(PORT, () => {
-  console.log(`
-╔══════════════════════════════════════════════════╗
-║   SPTRM – Smart Parking & Traffic Resource Mgr  ║
-║   Backend running on http://localhost:${PORT}      ║
-║   Team Levengers | OS+DBMS 2026-27              ║
-╚══════════════════════════════════════════════════╝
-  `);
-});
-
-module.exports = app;
+initDb()
+  .then(() => seedSlotsIfEmpty(slots))
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`SPTRM backend is running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('[FATAL] Startup failed:', err.message);
+    process.exit(1);
+  });
