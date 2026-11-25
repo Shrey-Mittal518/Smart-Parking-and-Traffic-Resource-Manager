@@ -1,40 +1,3 @@
-// resourceAllocationGraph.js
-//
-// In-memory Resource Allocation Graph (RAG) + wait-for graph cycle detection.
-//
-// Why a RAG (and not Banker's avoidance):
-//   - The parking lot allocates a small number of discrete, single-instance
-//     resources (parking bays + EV chargers) to booking requests (processes).
-//   - Banker's algorithm needs a pre-declared MAX claim per process and a safe
-//     sequence search; that does not match this app's request flow (a booking
-//     asks for "an ev slot and a charger", not a numeric claim vector).
-//   - Detection + resolution fits naturally: we build the RAG, derive a
-//     wait-for graph among processes, run DFS cycle detection, and on a cycle
-//     we pick a victim, release its held resources, and deny it (rollback).
-//
-// This module is deliberately DB-free: it only touches in-memory Maps.
-// Booking and slot persistence stays in the controller, keeping this
-// unit-testable without MySQL.
-//
-// Single-instance soundness: each process waits for at most ONE concrete
-// resource instance at a time (waitsFor is a single id), so a wait-for edge
-// P->Q always points at the one process that holds the resource P wants.
-// That makes the simple DFS cycle detection sound. (EV_CHARGER_COUNT defaults
-// to 1 to keep charger-waits concrete; >1 degrades to best-effort.)
-
-// ─── Internal state ──────────────────────────────────────────────────────────
-//
-// processes:  Map<requestId, { id, priority, holds: Set<resourceId>,
-//                             waitsFor: resourceId | null }>
-// resources: Map<resourceId, { id, type: 'slot'|'charger',
-//                              holder: requestId | null, waiters: Set<requestId> }>
-//
-// Edges are DERIVED (never stored), which keeps the graph consistent by
-// construction:
-//   assignment edge  R -> P  :  resources[r].holder === p
-//   request edge     P -> R  :  processes[p].waitsFor === r
-// The wait-for graph (process -> process) used for cycle detection is derived
-// from the request edges: P waits for R held by Q  ==>  P -> Q.
 
 class ResourceAllocationGraph {
   constructor() {
@@ -49,7 +12,6 @@ class ResourceAllocationGraph {
     this.deadlockLog = [];
   }
 
-  // Idempotent: re-registering an existing request is a safe no-op.
   registerRequest(id, priority) {
     if (this.processes.has(id)) return;
     this.processes.set(id, {
@@ -77,8 +39,6 @@ class ResourceAllocationGraph {
     this.processes.delete(id);
   }
 
-  // Ensure a resource node exists; type is inferred from the id convention
-  // ("CH*" -> charger, anything else -> slot).
   _ensureResource(r) {
     let res = this.resources.get(r);
     if (!res) {
@@ -93,11 +53,10 @@ class ResourceAllocationGraph {
     return res;
   }
 
-  // Record that process p now holds resource r (assignment edge R -> p).
   acquireResource(p, r) {
     const res = this._ensureResource(r);
     res.holder = p;
-    res.waiters.delete(p); // p no longer waits for something it now holds
+    res.waiters.delete(p); 
     let proc = this.processes.get(p);
     if (!proc) {
       // Defensive auto-register so the graph is never left inconsistent.
@@ -107,10 +66,7 @@ class ResourceAllocationGraph {
     proc.holds.add(r);
     if (proc.waitsFor === r) proc.waitsFor = null;
   }
-
-  // Release process p's hold on resource r. Clears the holder, drops r from
-  // p's holds, clears waitsFor if it pointed at r. Returns the freed id, or
-  // null if p did not hold r.
+  
   releaseResource(p, r) {
     const res = this.resources.get(r);
     const proc = this.processes.get(p);
@@ -122,17 +78,11 @@ class ResourceAllocationGraph {
     if (proc.waitsFor === r) proc.waitsFor = null;
     return r;
   }
-
-  // Record that process p is now waiting for resource r (request edge p -> r),
-  // then immediately run cycle detection. Idempotent: re-adding the same edge
-  // (waitsFor already === r) returns null and does not re-detect.
-  // Returns the detected cycle object or null.
   addWaitEdge(p, r) {
     const proc = this.processes.get(p);
     if (!proc) return null;
-    if (proc.waitsFor === r) return null; // idempotent re-add
+    if (proc.waitsFor === r) return null; 
 
-    // Clear any previous (different) wait edge from this process first.
     if (proc.waitsFor) {
       const prev = this.resources.get(proc.waitsFor);
       if (prev) prev.waiters.delete(p);
@@ -166,12 +116,6 @@ class ResourceAllocationGraph {
     }
     return graph;
   }
-
-  // Iterative DFS with three-color marking. On the first back edge to a gray
-  // (on-stack) node, extract the cycle and return { processes, resources }.
-  // Returns null when the wait-for graph is acyclic.
-  // Sound for single-instance resources because every wait edge targets one
-  // concrete holder.
   detectCycle() {
     const graph = this.buildWaitForGraph();
     const WHITE = 0;
@@ -215,9 +159,6 @@ class ResourceAllocationGraph {
     return null;
   }
 
-  // Resolve a detected cycle by rolling back the victim: release every
-  // resource it holds, clear its wait edge, forget it, and append an in-memory
-  // log entry. Returns { entry, freedResources }. RAG-only — no DB writes.
   resolveDeadlock(cycle, victimRequestId) {
     const proc = this.processes.get(victimRequestId);
     const freedResources = [];
