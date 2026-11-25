@@ -1,5 +1,3 @@
--- Matches the existing sptrm database schema.
--- The app creates this table automatically via initDb() on startup.
 
 CREATE DATABASE IF NOT EXISTS sptrm
   CHARACTER SET utf8mb4
